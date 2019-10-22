@@ -2,7 +2,10 @@
 
 The repository contains test exercise for JD-EDWARDS.
 
-To start the application please run ./start-repo.sh
+To start the application please run 
+```
+./start-repo.sh
+```
 
 The application provides a CRUD repository for bank accounts. It expects the data are stored into MySQL database named "JDE" with user "jde" and password "jdedwards". Please, look at db-create.sql for more details regarding creating the database. The table **account** has the following structure:
 
