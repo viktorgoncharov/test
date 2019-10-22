@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.virhon.jdedwards</groupId>
+  <artifactId>testtask</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>testtask</name>
+
+  <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.1.7.RELEASE</version>
+  </parent>
+
+  <properties>
+      <java.version>1.8</java.version>
+      <maven.compiler.source>${java.version}</maven.compiler.source>
+      <maven.compiler.target>${java.version}</maven.compiler.target>
+   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <repositories>
+      <repository>
+          <id>spring-releases</id>
+          <url>https://repo.spring.io/libs-release</url>
+      </repository>
+  </repositories>
+
+  <pluginRepositories>
+      <pluginRepository>
+          <id>spring-releases</id>
+          <url>https://repo.spring.io/libs-release</url>
+      </pluginRepository>
+  </pluginRepositories>
+
+  <dependencies>
+     <dependency>
+         <groupId>org.testng</groupId>
+         <artifactId>testng</artifactId>
+         <version>6.10</version>
+         <scope>test</scope>
+     </dependency>
+     <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>1.2.17</version>
+     </dependency>
+     <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+     </dependency>
+     <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+     </dependency>
+     <dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	 </dependency>
+	 <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-rest</artifactId>
+        <version>1.2.5.RELEASE</version>
+	</dependency>
+	 <dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-entitymanager</artifactId>
+    </dependency>
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>4.1.0.Final</version>
+	</dependency>
+	<!-- MySQL Connector-->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    </dependency>
+  </dependencies>
+  <build>
+  	<plugins>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-shade-plugin</artifactId>
+		  <version>2.3</version>
+		  <executions>
+		     <!-- Run shade goal on package phase -->
+		    <execution>
+			<phase>package</phase>
+			<goals>
+				<goal>shade</goal>
+			</goals>
+			<configuration>
+                      <transformers>
+                          <transformer
+                              implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                              <resource>META-INF/spring.handlers</resource>
+                          </transformer>
+                          <transformer
+                              implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer">
+                              <resource>META-INF/spring.factories</resource>
+                          </transformer>
+                          <transformer
+                              implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                              <resource>META-INF/spring.schemas</resource>
+                          </transformer>
+                          <transformer
+                              implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                          <transformer
+                              implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                              <mainClass>com.virhon.jdedwards.testtask.Application</mainClass>
+                          </transformer>
+                      </transformers>
+                  </configuration>
+		      </execution>
+		  </executions>
+		</plugin>        
+    </plugins>
+  </build>
+</project>
